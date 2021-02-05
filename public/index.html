@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Restaurant</title>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js"></script> 
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    
+        
+     
+</head>
+
+<body>
+    <script>
+        AFRAME.registerComponent('intersection-spawn', {
+            schema: {
+                default: '',
+                parse: AFRAME.utils.styleParser.parse
+            },
+
+            init: function () {
+                const data = this.data;
+                const el = this.el;
+
+                el.addEventListener('click', evt => {
+                // Create element.
+                const spawnEl = document.createElement('a-entity');
+
+                // Snap intersection point to grid and offset from center.
+                spawnEl.setAttribute('position', "-1.613 1.568 -2.850");
+                spawnEl.setAttribute('class', "sushi");
+                spawnEl.setAttribute('alongpath', {curve: '#track1', dur: 10000, loop:true, rotate:true, trigger: 'a-curve-point'});
+
+                const ambientSounds = document.querySelectorAll('.bg-music');
+                    ambientSounds.forEach(function(soundEntity) {
+                    soundEntity.components.sound.playSound();
+                
+                    });
+                
+                // Set components and properties.
+                Object.keys(data).forEach(name => {
+                    if (name === 'event') { return; }
+                    AFRAME.utils.entity.setComponentProperty(spawnEl, name, data[name]);
+                });
+
+                // Append to scene.
+                el.sceneEl.appendChild(spawnEl);
+                });
+            }
+            }); 
+
+            AFRAME.registerComponent('intersection-spawn2', {
+                schema: {
+                    default: '',
+                    parse: AFRAME.utils.styleParser.parse
+                },
+
+                init: function () {
+                    const data = this.data;
+                    const el = this.el;
+
+                    el.addEventListener('click', evt => {
+                    // Create element.
+                    const spawnEl = document.createElement('a-entity');
+
+                    // Snap intersection point to grid and offset from center.
+                    spawnEl.setAttribute('position', "-1.613 1.568 -2.850");
+                    spawnEl.setAttribute('class', "ramen");
+                    spawnEl.setAttribute('alongpath', {curve: '#track1', dur: 10000, loop:true, rotate:true, trigger: 'a-curve-point'});
+
+                    const ambientSounds = document.querySelectorAll('.bg-music');
+                    ambientSounds.forEach(function(soundEntity) {
+                    soundEntity.components.sound.playSound();
+                
+                    });
+                    
+                    // Set components and properties.
+                    Object.keys(data).forEach(name => {
+                        if (name === 'event') { return; }
+                        AFRAME.utils.entity.setComponentProperty(spawnEl, name, data[name]);
+                    });
+
+                    // Append to scene.
+                    el.sceneEl.appendChild(spawnEl);
+                    });
+                }
+            }); 
+
+        AFRAME.registerComponent('stop-sushi', {
+            schema: {
+                default: '',
+                parse: AFRAME.utils.styleParser.parse
+            },
+
+            init: function () {
+                const data = this.data;
+                const el = this.el;
+                
+                el.addEventListener('click', function() {
+                
+                    // delete elements
+                    document.querySelectorAll(".sushi").forEach(e => e.parentNode.removeChild(e));
+                
+                });
+            }
+        }); 
+
+        AFRAME.registerComponent('stop-ramen', {
+            schema: {
+                default: '',
+                parse: AFRAME.utils.styleParser.parse
+            },
+
+            init: function () {
+                const data = this.data;
+                const el = this.el;
+                
+                el.addEventListener('click', function() {
+                    
+                    // delete elements
+                    document.querySelectorAll(".ramen").forEach(e => e.parentNode.removeChild(e));
+                  
+                });
+            }
+        }); 
+            
+
+       </script>
+
+    <a-scene>
+        <!-- AFrame stuff goes here-->
+        <a-assets timeout="10000">
+            <audio id="japanese_music" src="/assets/Japanese.mp3" preload="auto" crossorigin="anonymous"></audio>
+
+            <a-asset-item id="table_model" response-type="arraybuffer" src="/assets/table.glb"></a-asset-item>
+            <a-asset-item id="box_model" response-type="arraybuffer" src="/assets/box.glb"></a-asset-item>
+            <a-asset-item id="counter_model" response-type="arraybuffer" src="/assets/counter.glb"></a-asset-item>
+            <a-asset-item id="tatami_model" response-type="arraybuffer" src="/assets/tatami.glb"></a-asset-item>
+            <a-asset-item id="book_model" response-type="arraybuffer" src="/assets/book.glb"></a-asset-item>
+            <a-asset-item id="ramen_model" response-type="arraybuffer" src="/assets/ramen.glb"></a-asset-item>
+            <a-asset-item id="teatable_model" response-type="arraybuffer" src="/assets/teatable.glb"></a-asset-item>
+            <a-asset-item id="chopsticks_model" response-type="arraybuffer" src="/assets/chopsticks.glb"></a-asset-item>
+            <a-asset-item id="juice_model" response-type="arraybuffer" src="/assets/juice.glb"></a-asset-item>
+            <a-asset-item id="sushi_model" response-type="arraybuffer" src="/assets/sushi1.glb"></a-asset-item>
+
+            <img id="sushi_img"    src="/assets/sushi.jpg" crossorigin="anonymous">
+            <img id="ramen_img"     src="/assets/ramen.jpg" crossorigin="anonymous">
+            
+            <a-mixin id="spawn" position="0 0 0" scale="0.047 0.047 0.047" gltf-model="#sushi_model" 
+                    material="color:rgb(255, 0, 0)" shadow >
+            </a-mixin>
+            <a-mixin  id="spawn2" position="0 0 0" scale="0.006 0.006 0.006" gltf-model="#ramen_model" 
+                    material="color:rgb(255, 0, 0)" shadow >
+            </a-mixin>
+
+        </a-assets>
+
+        <a-entity camera wasd-controls look-controls position="-5 3 0">
+            <a-entity cursor="rayOrigin:mouse;" raycaster="objects:.interactive, #chopsticks, #teatable, #juice" 
+                        static-body="shape: sphere; sphereRadius: 0.001"
+                        super-hands="colliderEvent: raycaster-intersection; colliderEventProperty: els;
+                        colliderEndEvent:raycaster-intersection-cleared;
+                        colliderEndEventProperty: clearedEls;">
+            </a-entity>
+            <a-entity light="type:spot; intensity:1.4; castShadow:true; shadowBias:-0.0005; angle:40; penumbra:0.3;" position="0.5 -0.5 0" rotation="0 0 0"></a-entity>
+        </a-entity>
+
+        <a-entity class="bg-music" sound="src:#japanese_music; autoplay:false;"></a-entity>
+            
+        <a-entity id="universal_button" position="-4.130 1.083 -7.388">
+            <a-entity class="button interactive"  position="0 0.02 0" intersection-spawn="mixin: spawn" rotation="-3.907 -15.43 19.002" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(100, 250, 100)"
+                        animation__mouseenter="property:material.color; type:color; to:rgb(0, 255, 0); startEvents:mouseenter; dur:200"
+                        animation__mouseleave="property:material.color; type:color; to:rgb(100, 255, 0); startEvents:mouseleave; dur:200"
+                        animation__click="property:position.y; from:-0.08; to:0.02; startEvents:click; dur:300" shadow>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="universal_button" position="-4.159 1.170 -6.223">
+            <a-entity class="button interactive" intersection-spawn2="mixin: spawn2" position="0 0.062 0" rotation="-3.907 -15.431 19.002" geometry="primitive:cylinder; radius:0.15; height:0.2;" scale="1 1.477 1" 
+                        material="color:rgb(100, 250, 100)"
+                        animation__mouseenter="property:material.color; type:color; to:rgb(0, 255, 0); startEvents:mouseenter; dur:200"
+                        animation__mouseleave="property:material.color; type:color; to:rgb(100, 255, 0); startEvents:mouseleave; dur:200"
+                        animation__click="property:position.y; from:-0.038; to:0.062; startEvents:click; dur:300" shadow>
+            </a-entity>
+        </a-entity> 
+
+        <a-entity id="universal_button" position="-4.150 1.143 -6.854">
+            <a-entity class="button interactive" stop-sushi position="0 0.087 0" rotation="2.016 -16.336 17.417" geometry="primitive:cylinder; radius:0.15; height:0.2;" material="color:rgb(250, 100, 100)"
+                        animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); startEvents:mouseenter; dur:200"
+                        animation__mouseleave="property:material.color;  type:color; to:rgb(255, 100, 100); startEvents:mouseleave; dur:200"
+                        animation__click="property:position.y; from:-0.013; to:0.087; startEvents:click; dur:300" shadow>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="universal_button" position="-4.159 1.105 -5.673">
+            <a-entity class="button interactive" stop-ramen position="0 0.041 0" rotation="9.984 -13.804 17.682" geometry="primitive:cylinder; radius:0.15; height:0.2;" scale= "1 2.169 1"material="color:rgb(250, 100, 100)"
+                        animation__mouseenter="property:material.color; type:color; to:rgb(255, 0, 0); startEvents:mouseenter; dur:200"
+                        animation__mouseleave="property:material.color; type:color; to:rgb(255, 100, 100); startEvents:mouseleave; dur:200"
+                        animation__click="property:position.y; from:-0.059; to:0.041; startEvents:click; dur:300" shadow>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="table" click-drag position="0 0.108 7.445" rotation="0 -90 0" scale="0.03 0.03 0.03"
+                    gltf-model="#table_model">
+        </a-entity>
+
+        <a-entity id="box" position="2.274 -1.439 17.619" rotation="0 -90 0" scale="5.86 2.84 2.210"
+                    gltf-model="#box_model">
+        </a-entity>
+
+        <a-entity id="counter1" position="1.217 -0.226 -0.125" rotation="0 0 0" scale="1.636 1.636 1.370"
+                    gltf-model="#counter_model">
+        </a-entity>
+        <a-entity id="counter2" position="-0.070 -0.226 2.452" rotation="0 -90 0" scale="1.636 1.636 0.895"
+                    gltf-model="#counter_model">
+        </a-entity>
+        <a-entity id="counter3" position="-0.019 -0.226 -2.645" rotation="0 90 0" scale="1.636 1.636 0.895"
+                    gltf-model="#counter_model">
+        </a-entity>
+        <a-entity id="counter4" position="-1.310 -0.226 -0.135" rotation="0 180 0" scale="1.636 1.636 1.370"
+                    gltf-model="#counter_model">
+        </a-entity>
+
+        <a-entity id="tatami" position="-0.157 -0.136 0.174" rotation="0 -90 0" scale="5 5 5"
+                    gltf-model="#tatami_model">
+        </a-entity>
+
+        <a-entity id="book" position="-3.532 1.124 -6.521" rotation="18.902 -90 0" scale="0.113 0.113 0.113"
+                    gltf-model="#book_model">
+        </a-entity> 
+
+        <a-entity id="teatable" position="1.399 0.865 -6.972" rotation="0 0 0" scale="1.222 1.222 1.222"
+                    gltf-model="#teatable_model">
+        </a-entity> 
+
+        <a-entity id="chopsticks" position="2.750 1.039 -6.933" rotation="0 -131.567 0" scale="0.046 0.046 0.046"
+                    gltf-model="#chopsticks_model" grabbable draggable droppable shadow
+                    event-set__dragdrop="_event: drag-drop; geometry.primitive: sphere; geometry.radius: 0.25"
+                    event-set__dragon="_event: dragover-start; material.wireframe: true"
+                    event-set__dragoff="_event: dragover-end; material.wireframe: false">
+        </a-entity> 
+
+        <a-entity id="juice" position="2.762 0.251 -7.763" rotation="1.224 -90 0" scale="0.245 0.245 0.245"
+                    gltf-model="#juice_model" grabbable draggable droppable shadow
+                    event-set__dragdrop="_event: drag-drop; geometry.primitive: sphere; geometry.radius: 0.25"
+                    event-set__dragon="_event: dragover-start; material.wireframe: true"
+                    event-set__dragoff="_event: dragover-end; material.wireframe: false">
+        </a-entity> 
+
+        <a-entity id="sushi_plane" position="-3.294 1.434 -7.090" rotation="-64.297 -101.876 10.097" scale="0.663 0.663 0.663"
+                  geometry="primitive:plane; width:1.5; height:1.0;" 
+                  material="src:#sushi_img"></a-entity>
+
+        <a-entity id="ramen_plane" position="-3.366 1.514 -5.949" rotation="-70.243 -70.699 -17.863" scale="0.669 0.669 0.669"
+                  geometry="primitive:plane; width:1.5; height:1.0;" 
+                  material="src:#ramen_img"></a-entity>
+
+        <a-curve id="track1">
+            <a-curve-point position="-1.48 1.568 -2.850"></a-curve-point>
+            <a-curve-point position="-1.48 1.568 2.787"></a-curve-point>
+            <a-curve-point position="1.1 1.568 2.850"></a-curve-point>
+            <a-curve-point position="1.1 1.568 -2.850"></a-curve-point>
+            <a-curve-point position="-1.48 1.568 -2.850"></a-curve-point>
+        </a-curve>
+                                  
+        <a-entity class="cube" position="-1.601 1.670 -2.850" geometry="primitive:box; width:0.5; depth:0.5; height:0.6;" scale="0.947 0.515 1.218"
+                  material="color:rgb(0, 0, 0)">
+        </a-entity>
+        
+        <a-entity environment="preset:japan"></a-entity>
+
+    </a-scene>
+</body>
+</html>

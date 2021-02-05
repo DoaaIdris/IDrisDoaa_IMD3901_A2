@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mini Juice Carton
+* source:	https://sketchfab.com/3d-models/mini-juice-carton-07ab8b91f87746a690c1554159d816ac
+* author:	shiannecarrington (https://sketchfab.com/shiannecarrington)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mini Juice Carton" (https://sketchfab.com/3d-models/mini-juice-carton-07ab8b91f87746a690c1554159d816ac) by shiannecarrington (https://sketchfab.com/shiannecarrington) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
